@@ -5,7 +5,7 @@ import Server from './classes/server';
 async function main(): Promise<void> {
     config();
 
-    const server = new Server(process.env.PORT);
+    const server = Server.instance;
     await server.listen();
 }
 
