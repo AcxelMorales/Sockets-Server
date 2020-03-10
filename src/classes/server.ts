@@ -31,7 +31,7 @@ export default class Server {
         this.listenSockets();
     }
 
-    public static get instance() {
+    public static get instance(): Server {
         return this._instance || (this._instance = new this());
     }
 
@@ -39,10 +39,12 @@ export default class Server {
         console.log('.... Listen connections - sockets ....');
 
         this.io.on('connection', client => {
-            console.log('.... Client conected ....');
+            console.log(client.id);
 
-            socket.disconnect(client);
+            socket.clientConnect(client);
+            socket.user(client);
             socket.message(client, this.io);
+            socket.disconnect(client);
         });
     }
 
