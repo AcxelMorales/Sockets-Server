@@ -48,3 +48,21 @@ export function postMessagesWithId(req: Request, res: Response): Response {
         id
     });
 }
+
+export function getIdsByUsers(req: Request, res: Response): void {
+    const server = Server.instance;
+
+    server.io.clients((err: any, clients: String[]) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            clients
+        });        
+    });
+}
