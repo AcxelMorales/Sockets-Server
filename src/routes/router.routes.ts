@@ -8,6 +8,8 @@ router.get('/messages', routerCtrl.getMessages);
 
 router.get('/users', routerCtrl.getIdsByUsers);
 
+router.get('/users/detail', routerCtrl.getUsersWithName);
+
 router.post('/messages', routerCtrl.postMessages);
 
 router.post('/messages/:id', routerCtrl.postMessagesWithId);

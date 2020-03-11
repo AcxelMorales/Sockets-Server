@@ -11,10 +11,12 @@ export const clientConnect = (client: Socket) => {
     usersOnline.add(user);
 };
 
-export const disconnect = (client: Socket) => {
+export const disconnect = (client: Socket, io: socketIO.Server) => {
     client.on('disconnect', () => {
         console.log('.... Client disconnected ....');
         usersOnline.deleteUser(client.id);
+
+        io.emit('users-online', usersOnline.getAllUsers());
     });
 };
 
@@ -25,10 +27,12 @@ export const message = (client: Socket, io: socketIO.Server) => {
     });
 };
 
-export const user = (client: Socket) => {
+export const user = (client: Socket, io: socketIO.Server) => {
     client.on('user-config', (payload: { name: string }, callback: Function) => {
     
         usersOnline.updateName(client.id, payload.name);
+
+        io.emit('users-online', usersOnline.getAllUsers());
 
         callback({
             ok: true,

@@ -42,9 +42,9 @@ export default class Server {
             console.log(client.id);
 
             socket.clientConnect(client);
-            socket.user(client);
+            socket.user(client, this.io);
             socket.message(client, this.io);
-            socket.disconnect(client);
+            socket.disconnect(client, this.io);
         });
     }
 

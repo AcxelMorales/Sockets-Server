@@ -17,7 +17,7 @@ export default class UserList {
     }
 
     public getAllUsers(): User[] {
-        return this.list;
+        return this.list.filter(user => user.name !== 'nameless');
     }
 
     public getAllUsersByRoom(room: string): User[] {

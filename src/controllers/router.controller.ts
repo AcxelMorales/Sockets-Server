@@ -1,6 +1,7 @@
 import { Response, Request } from 'express';
 
 import Server from '../classes/server';
+import { usersOnline } from '../sockets/socket';
 
 export function getMessages(req: Request, res: Response): Response {
     return res.status(200).json({
@@ -64,5 +65,12 @@ export function getIdsByUsers(req: Request, res: Response): void {
             ok: true,
             clients
         });        
+    });
+}
+
+export function getUsersWithName(req: Request, res: Response) {
+    return res.status(200).json({
+        ok: true,
+        clients: usersOnline.getAllUsers()
     });
 }
